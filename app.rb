@@ -2,6 +2,7 @@ require 'sinatra/base'
 require_relative 'lib/peep'
 require_relative 'spec/web_helpers'
 require_relative 'lib/user'
+require_relative './lib/database_connection_setup'
 
 class Chitter < Sinatra::Base
   enable :sessions
