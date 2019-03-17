@@ -17,7 +17,7 @@ class User
   end
 
   def self.add(email:, username:, password:)
-    result = DatabaseConnection.query("INSERT INTO users(username, email, password) VALUES('#{email}', '#{username}', '#{password}' ) RETURNING id, email, username, password;")
+    result = DatabaseConnection.query("INSERT INTO users(email, username, password) VALUES('#{email}', '#{username}', '#{password}' ) RETURNING id, email, username, password;")
     User.new(id: result[0]['id'], email: result[0]['email'], username: result[0]['username'], password: result[0]['password'])
   end
 end
