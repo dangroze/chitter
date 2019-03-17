@@ -16,7 +16,7 @@ class Peep
   end
 
   def self.post(peep:)
-    result = DatabaseConnection.query( "INSERT INTO peeps(peep, time) VALUES('#{peep}', '#{Time.now}' ) RETURNING id, peep, time;")
+    result = DatabaseConnection.query( "INSERT INTO peeps(peep, time) VALUES('#{peep}', '#{Time.now.strftime("%I:%M on %d %B, %Y")}' ) RETURNING id, peep, time;")
     Peep.new(id: result[0]['id'], peep: result[0]['peep'], time: result[0]['time'])
   end
 
