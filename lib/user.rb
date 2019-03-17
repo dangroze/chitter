@@ -2,21 +2,22 @@ require 'pg'
 require_relative './database_connection'
 
 class User
-  attr_reader :id, :username, :password
+  attr_reader :id, :email, :username, :password
 
-  def initialize(id:, username:, password:)
+  def initialize(id:, email:, username:, password:)
     @id = id
+    @email = email
     @username = username
     @password = password
   end
 
   def self.all
     result = DatabaseConnection.query("SELECT * FROM users;")
-    result.map { |row| User.new(id: row['id'], username: row['username'], password: row['password']) }
+    result.map { |user| User.new(id: user['id'], email: user['email'], username: user['username'], password: user['password']) }
   end
 
-  def self.add(username:, password:)
-    result = DatabaseConnection.query("INSERT INTO users(username, password) VALUES('#{username}', '#{password}' ) RETURNING id, username, password;")
-    User.new(id: result[0]['id'], username: result[0]['username'], password: result[0]['password'])
+  def self.add(email:, username:, password:)
+    result = DatabaseConnection.query("INSERT INTO users(username, email, password) VALUES('#{email}', '#{username}', '#{password}' ) RETURNING id, email, username, password;")
+    User.new(id: result[0]['id'], email: result[0]['email'], username: result[0]['username'], password: result[0]['password'])
   end
 end

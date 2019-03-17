@@ -16,7 +16,7 @@ class Chitter < Sinatra::Base
   end
 
   post '/signup' do
-    @user = User.add(username: params[:username], password: params[:password])
+    @user = User.add(username: params[:username], email: params[:email], password: params[:password])
     session[:user_id] = @user.id
     redirect '/peeps'
   end
