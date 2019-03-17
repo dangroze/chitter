@@ -1,1 +1,3 @@
 CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(20), password VARCHAR(30));
+ALTER TABLE users
+  ADD email VARCHAR(50);
